@@ -44,12 +44,12 @@ jobs:
           mkdir -p ../ansible/kubeconfigs
           terraform output -json kubeconfig_paths > ../ansible/kubeconfigs/kubeconfigs.json
           python3 - <<'PY'
-import json, sys
-d=json.load(open('kubeconfigs.json'))
-outdir='../ansible/kubeconfigs'
-for k,v in d.items():
-    open(f'{outdir}/{k}_kubeconfig','w').write('') 
-PY
+          import json, sys
+          d=json.load(open('kubeconfigs.json'))
+          outdir='../ansible/kubeconfigs'
+          for k,v in d.items():
+              open(f'{outdir}/{k}_kubeconfig','w').write('') 
+          PY
 
   ansible:
     runs-on: ubuntu-latest
