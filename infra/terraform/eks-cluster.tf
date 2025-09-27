@@ -17,13 +17,20 @@ provider "aws" {
   region = "us-west-2"
 }
 
+locals {
+  region_providers = {
+    "us-east-1" = aws.us-east-1
+    "us-west-2" = aws.us-west-2
+  }
+
 # Better: dynamically create providers using locals and for_each - simplified above.
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   for_each = var.regions
   providers = {
-    aws = aws.${each.key}
+    #aws = aws.${each.key}
+    aws = local.region_providers[each.key]
   }
 
   cluster_name    = each.value

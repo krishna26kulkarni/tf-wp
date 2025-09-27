@@ -1,6 +1,9 @@
+
 resource "aws_vpc" "vpc" {
   for_each = var.regions
-  provider = aws.${each.key} # requires provider aliases created below
+  provider = {
+      aws = local.region_providers[each.key]
+  }
   cidr_block = var.vpc_cidr_per_region[each.key]
   enable_dns_hostnames = true
   enable_dns_support = true
