@@ -26,7 +26,7 @@ jobs:
         id: assume_role
         run: |
           CREDS_JSON=$(aws sts assume-role \
-            --role-arn ${{ secrets.AWS_ROLE_ARN }} \
+            --role-arn arn:aws:iam::434336750245:role/admin_role \
             --role-session-name github-actions)
           echo "CREDS_JSON=$CREDS_JSON" >> $GITHUB_ENV
           # Extract temporary credentials
